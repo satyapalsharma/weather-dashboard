@@ -1,0 +1,196 @@
+/*
+ * src/App.css
+ *
+ * Main stylesheet for the Weather Dashboard application.
+ * Defines global styles, layout for the main components,
+ * and responsive design adjustments.
+ */
+
+/*
+ * Global Styles
+ * Resets, base typography, and overall page background.
+ */
+:root {
+  --primary-bg: #1a202c; /* Dark background for the app */
+  --secondary-bg: #282c34; /* Slightly lighter background for cards/sections */
+  --text-color: #e0e0e0; /* Light text color */
+  --accent-color: #4a90e2; /* Sky blue accent for buttons, highlights */
+  --border-color: #3a404c; /* Subtle border color */
+  --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  --error-color: #e74c3c; /* Red for error messages */
+  --success-color: #2ecc71; /* Green for success messages */
+
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --border-radius: 8px;
+  --spacing-unit: 16px;
+}
+
+/* Box-sizing reset for consistent layout */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body and HTML base styles */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex; /* Use flex to ensure #root takes full height */
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  padding: var(--spacing-unit);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/*
+ * App Container
+ * Main layout for the entire dashboard.
+ */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Max width for the dashboard content */
+  min-height: 100%;
+  padding: var(--spacing-unit) 0;
+  gap: calc(var(--spacing-unit) * 2); /* Spacing between major sections */
+}
+
+/*
+ * Header Styles
+ * Title of the application.
+ */
+.App-header {
+  text-align: center;
+  padding-bottom: var(--spacing-unit);
+}
+
+.App-header h1 {
+  font-size: 2.8em;
+  font-weight: 700;
+  color: var(--text-color);
+  text-shadow: 0 2px 4px var(--shadow-color);
+}
+
+/*
+ * Main Content Area
+ * Contains the search bar, current weather, and forecast chart.
+ */
+.App-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: calc(var(--spacing-unit) * 2); /* Spacing between search and weather display */
+}
+
+/* Container for CurrentWeather and ForecastChart */
+.weather-display-area {
+  display: grid;
+  grid-template-columns: 1fr; /* Stack on small screens */
+  gap: calc(var(--spacing-unit) * 2);
+  width: 100%;
+}
+
+/*
+ * Common Card/Section Styles
+ * Styles applied to individual components like CurrentWeather and ForecastChart.
+ */
+.card {
+  background-color: var(--secondary-bg);
+  border-radius: var(--border-radius);
+  padding: calc(var(--spacing-unit) * 1.5);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/*
+ * Utility Classes
+ */
+.text-center {
+  text-align: center;
+}
+
+.loading-message,
+.error-message {
+  padding: var(--spacing-unit);
+  border-radius: var(--border-radius);
+  margin-top: var(--spacing-unit);
+  font-size: 1.1em;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--secondary-bg);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
+}
+
+.loading-message {
+  color: var(--accent-color);
+  border: 1px solid var(--border-color);
+}
+
+/*
+ * Responsive Design
+ * Adjust layout for larger screens.
+ */
+@media (min-width: 768px) {
+  .App-header h1 {
+    font-size: 3.5em;
+  }
+
+  .weather-display-area {
+    grid-template-columns: 1fr 2fr; /* CurrentWeather on left, ForecastChart on right */
+    align-items: start; /* Align items to the top of their grid cells */
+  }
+
+  /* Adjust padding for larger screens */
+  body {
+    padding: calc(var(--spacing-unit) * 2);
+  }
+}
+
+@media (min-width: 1024px) {
+  .App-header h1 {
+    font-size: 4em;
+  }
+
+  .weather-display-area {
+    grid-template-columns: 1fr 3fr; /* Give more space to the chart */
+  }
+}
+
+/*
+ * Accessibility Enhancements
+ */
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  border-radius: var(--border-radius); /* Ensure outline respects border-radius */
+}
